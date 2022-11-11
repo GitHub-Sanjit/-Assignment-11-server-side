@@ -19,7 +19,14 @@ const client = new MongoClient(uri, {
 
 async function run() {
   try {
-    const serviceCollection = client.db("autoPress").collection("services");
+    const serviceCollection = client.db("auroPress").collection("services");
+
+    app.get("/services", async (req, res) => {
+      const query = {};
+      const cursor = serviceCollection.find(query);
+        const services = await cursor.toArray();
+        res.send(services)
+    });
   } finally {
   }
 }
